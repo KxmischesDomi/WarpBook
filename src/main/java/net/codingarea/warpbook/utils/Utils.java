@@ -2,6 +2,7 @@ package net.codingarea.warpbook.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -82,7 +83,7 @@ public class Utils {
 	}
 
 	/**
-	 * @returns true if inventory of the player is full
+	 * @return true if inventory of the player is full
 	 */
 	public static boolean isInventoryFull(final @Nonnull Player player) {
 		return player.getInventory().firstEmpty() == -1;
@@ -91,5 +92,10 @@ public class Utils {
 	public static boolean clickedOwnInventory(final @Nonnull InventoryClickEvent event) {
 		return event.getClickedInventory().getHolder() == event.getWhoClicked();
 	}
+
+	public static String getServerVersion() {
+		return Bukkit.getBukkitVersion().split("-")[0];
+	}
+
 
 }

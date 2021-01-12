@@ -1,16 +1,13 @@
 package net.codingarea.warpbook;
 
 import net.codingarea.warpbook.commands.TestCommand;
+import net.codingarea.warpbook.listener.CraftingListener;
 import net.codingarea.warpbook.listener.InteractListener;
 import net.codingarea.warpbook.listener.InventoryListener;
 import net.codingarea.warpbook.listener.RestrictionListener;
-import net.codingarea.warpbook.utils.WarpBookUtils;
+import net.codingarea.warpbook.manager.RecipeManager;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.event.Listener;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.annotation.CheckReturnValue;
@@ -24,6 +21,8 @@ public class WarpBookPlugin extends JavaPlugin {
 
     private static WarpBookPlugin plugin;
 
+    private RecipeManager recipeManager;
+
     @Override
     public void onLoad() {
         plugin = this;
@@ -32,8 +31,7 @@ public class WarpBookPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
 
-        createWarpPageRecipe();
-        createWarpBookRecipe();
+        recipeManager = new RecipeManager();
 
         registerListeners();
         getCommand("test").setExecutor(new TestCommand());
@@ -43,28 +41,7 @@ public class WarpBookPlugin extends JavaPlugin {
         registerListener(new RestrictionListener());
         registerListener(new InteractListener());
         registerListener(new InventoryListener());
-    }
-
-    private void createWarpPageRecipe() {
-        ItemStack itemStack = WarpBookUtils.createWarpPage();
-        NamespacedKey nsKey = new NamespacedKey(plugin, "warp_page_recipe");
-        ShapedRecipe recipe = new ShapedRecipe(nsKey, itemStack);
-        recipe.shape("   ", " E ", " P ");
-        recipe.setIngredient('E', Material.ENDER_PEARL);
-        recipe.setIngredient('P', Material.PAPER);
-
-        Bukkit.getServer().addRecipe(recipe);
-    }
-
-    private void createWarpBookRecipe() {
-        ItemStack itemStack = WarpBookUtils.createWarpBook();
-        NamespacedKey nsKey = new NamespacedKey(plugin, "warp_book_recipe");
-        ShapedRecipe recipe = new ShapedRecipe(nsKey, itemStack);
-        recipe.shape("   ", " E ", " B ");
-        recipe.setIngredient('E', Material.ENDER_PEARL);
-        recipe.setIngredient('B', Material.BOOK);
-
-        Bukkit.getServer().addRecipe(recipe);
+        registerListener(new CraftingListener());
     }
 
     public void registerListener(Listener... listeners) {
@@ -75,8 +52,14 @@ public class WarpBookPlugin extends JavaPlugin {
 
     @Nonnull
     @CheckReturnValue
-    public static WarpBookPlugin getPlugin() {
+    public static WarpBookPlugin getInstance() {
         return plugin;
+    }
+
+    @Nonnull
+    @CheckReturnValue
+    public RecipeManager getRecipeManager() {
+        return recipeManager;
     }
 
 }

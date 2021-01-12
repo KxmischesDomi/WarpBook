@@ -1,0 +1,11 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "item/book"
+    },
+	
+	 "overrides": [
+	{"predicate": {"custom_model_data":700}, "model": "item/warp_book"}
+	]
+	
+}

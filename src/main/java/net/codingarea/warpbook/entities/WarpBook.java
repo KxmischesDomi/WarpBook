@@ -16,7 +16,7 @@ import java.io.IOException;
  */
 public class WarpBook {
 
-	public static int customModelData = 700;
+	public static final int customModelData = 700;
 	public static String bookTitle = "§5Warp Book";
 
 	private final ItemStack itemStack;

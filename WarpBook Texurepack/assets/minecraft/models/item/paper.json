@@ -1,0 +1,12 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "item/paper"
+    },
+	
+	 "overrides": [
+	{"predicate": {"custom_model_data":700}, "model": "item/warp_page_unused"},
+	{"predicate": {"custom_model_data":701}, "model": "item/warp_page_used"}
+	]
+	
+}

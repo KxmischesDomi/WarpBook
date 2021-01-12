@@ -1,6 +1,7 @@
 package net.codingarea.warpbook.entities;
 
 import de.tr7zw.nbtapi.NBTItem;
+import net.codingarea.warpbook.manager.RecipeManager.ColoredWarpItem;
 import net.codingarea.warpbook.utils.ItemBuilder;
 import net.codingarea.warpbook.utils.Utils;
 import org.bukkit.Location;
@@ -17,8 +18,7 @@ import javax.annotation.Nullable;
  */
 public class WarpPage {
 
-	public static int unusedCustomModelData = 700;
-	public static int usedCustomModelData = 701;
+	public static final int unusedCustomModelData = 700;
 
 	private ItemStack itemStack;
 	private boolean used;
@@ -36,7 +36,7 @@ public class WarpPage {
 
 		NBTItem nbtItem = new NBTItem(new ItemStack(Material.PAPER));
 		nbtItem.setString("location", Utils.getStringFromLocation(pageLocation));
-		nbtItem.setInteger("CustomModelData", usedCustomModelData);
+		nbtItem.setInteger("CustomModelData", ColoredWarpItem.getDefaultModelData());
 
 		ItemBuilder itemBuilder = new ItemBuilder(nbtItem.getItem());
 		itemBuilder.setLore(getLore());

@@ -3,6 +3,7 @@ package net.codingarea.warpbook.utils;
 import de.tr7zw.nbtapi.NBTItem;
 import net.codingarea.warpbook.entities.WarpBook;
 import net.codingarea.warpbook.entities.WarpPage;
+import net.codingarea.warpbook.manager.RecipeManager.ColoredWarpItem;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -16,7 +17,7 @@ import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Objects;
 
-import static net.codingarea.warpbook.WarpBookPlugin.getPlugin;
+import static net.codingarea.warpbook.WarpBookPlugin.getInstance;
 
 /**
  * @author KxmischesDomi | https://github.com/kxmischesdomi
@@ -49,7 +50,7 @@ public class WarpBookUtils {
 		NBTItem nbtItem = new NBTItem(itemStack);
 		int modelData = nbtItem.getInteger("CustomModelData");
 
-		if (modelData != WarpPage.unusedCustomModelData && modelData != WarpPage.usedCustomModelData) {
+		if (modelData != WarpPage.unusedCustomModelData && !ColoredWarpItem.isColoredPageModelData(modelData)) {
 			return null;
 		}
 
@@ -61,7 +62,7 @@ public class WarpBookUtils {
 	@Nullable
 	@CheckReturnValue
 	public static WarpBook getWarpBook(final @Nonnull ItemStack itemStack) {
-		if (itemStack.getType() != Material.BOOK) {
+		if (itemStack.getType() != Material.ENCHANTED_BOOK) {
 			return null;
 		}
 
@@ -95,7 +96,7 @@ public class WarpBookUtils {
 	@Nonnull
 	@CheckReturnValue
 	public static ItemStack createWarpBook() {
-		NBTItem nbtItem = new NBTItem(new ItemStack(Material.BOOK));
+		NBTItem nbtItem = new NBTItem(new ItemStack(Material.ENCHANTED_BOOK));
 		nbtItem.setInteger("CustomModelData", WarpBook.customModelData);
 
 		ItemBuilder itemBuilder = new ItemBuilder(nbtItem.getItem());
@@ -113,8 +114,9 @@ public class WarpBookUtils {
 	public static void teleportPlayer(final @Nonnull Player player, final @Nonnull Location location) {
 		player.closeInventory();
 		player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS,  25, 1));
+		player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,  25, 1));
 
-		Bukkit.getScheduler().runTaskLater(getPlugin(), () -> {
+		Bukkit.getScheduler().runTaskLater(getInstance(), () -> {
 			player.getWorld().playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 4, 1);
 			player.teleport(location);
 			player.getWorld().playEffect(player.getLocation(), Effect.ENDER_SIGNAL, 1);

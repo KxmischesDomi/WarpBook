@@ -1,12 +1,12 @@
 <component name="libraryTable">
-  <library name="spigot-1.13.2">
+  <library name="spigot-1.14.4">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../../../Libaries/Minecraft/spigot-1.13.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../Libaries/Minecraft/spigot-1.14.4.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../../../Libaries/Minecraft/item-nbt-api-plugin-2.7.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../../../../Libaries/Minecraft/spigot-1.13.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../Libaries/Minecraft/spigot-1.14.4.jar!/" />
     </SOURCES>
   </library>
 </component>
