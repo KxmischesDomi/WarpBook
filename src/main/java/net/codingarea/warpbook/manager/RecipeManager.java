@@ -1,8 +1,6 @@
 package net.codingarea.warpbook.manager;
 
 import de.tr7zw.nbtapi.NBTItem;
-import net.codingarea.warpbook.utils.ItemBuilder;
-import net.codingarea.warpbook.utils.Utils;
 import net.codingarea.warpbook.utils.WarpBookUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
@@ -16,9 +14,7 @@ import org.bukkit.inventory.ShapelessRecipe;
 import javax.annotation.CheckReturnValue;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static net.codingarea.warpbook.WarpBookPlugin.getInstance;
