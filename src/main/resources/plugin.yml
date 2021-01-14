@@ -4,6 +4,3 @@ author: KxmischesDomi
 description: A Spigot Version of the WarpBook mod
 main: net.codingarea.warpbook.WarpBookPlugin
 version: 1.0
-
-commands:
-  test:

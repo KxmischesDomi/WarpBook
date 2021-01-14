@@ -1,6 +1,5 @@
 package net.codingarea.warpbook;
 
-import net.codingarea.warpbook.commands.TestCommand;
 import net.codingarea.warpbook.listener.CraftingListener;
 import net.codingarea.warpbook.listener.InteractListener;
 import net.codingarea.warpbook.listener.InventoryListener;
@@ -34,7 +33,6 @@ public class WarpBookPlugin extends JavaPlugin {
         recipeManager = new RecipeManager();
 
         registerListeners();
-        getCommand("test").setExecutor(new TestCommand());
     }
 
     public void registerListeners() {
