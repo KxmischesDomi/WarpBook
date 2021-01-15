@@ -89,7 +89,7 @@ public class WarpBookUtils {
 
 		ItemBuilder itemBuilder = new ItemBuilder(nbtItem.getItem());
 		itemBuilder.setDisplayName("§fWarp Page");
-		itemBuilder.setLore("§5Page not bound yet");
+		itemBuilder.setLore(WarpPage.getUnboundLore());
 		return itemBuilder.build();
 	}
 

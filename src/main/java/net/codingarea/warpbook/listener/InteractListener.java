@@ -26,13 +26,17 @@ public class InteractListener implements Listener {
 		if (warpPage != null) {
 			if (!warpPage.isUsed()) {
 				Utils.decreaseItemStack(event.getPlayer().getInventory(), slot);
-				warpPage.setPageLocation(event.getPlayer().getLocation());
+				warpPage.bound(event.getPlayer().getLocation());
 				if (event.getItem().getAmount() == 1) {
 					event.getPlayer().getInventory().setItem(slot, warpPage.getItemStack());
 				} else {
 					Utils.safeGiveItemToPlayer(event.getPlayer(), warpPage.getItemStack());
 				}
 			} else {
+				if (event.getPlayer().isSneaking()) {
+					warpPage.unbound();
+					return;
+				}
 				if (warpPage.getPageLocation() == null) return;
 				WarpBookUtils.teleportPlayer(event.getPlayer(), warpPage.getPageLocation());
 			}

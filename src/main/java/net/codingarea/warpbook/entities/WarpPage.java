@@ -20,7 +20,7 @@ public class WarpPage {
 
 	public static final int unusedCustomModelData = 700;
 
-	private ItemStack itemStack;
+	private final ItemStack itemStack;
 	private boolean used;
 	private Location pageLocation;
 
@@ -30,11 +30,11 @@ public class WarpPage {
 		this.used = location != null;
 	}
 
-	public void setPageLocation(final @Nonnull Location pageLocation) {
+	public void bound(final @Nonnull Location pageLocation) {
 		used = true;
 		this.pageLocation = pageLocation;
 
-		NBTItem nbtItem = new NBTItem(new ItemStack(Material.PAPER));
+		NBTItem nbtItem = new NBTItem(itemStack, true);
 		nbtItem.setString("location", Utils.getStringFromLocation(pageLocation));
 		nbtItem.setInteger("CustomModelData", ColoredWarpItem.getDefaultModelData());
 
@@ -42,13 +42,39 @@ public class WarpPage {
 		itemBuilder.setLore(getLore());
 		itemBuilder.setDisplayName(this.itemStack.getItemMeta().getDisplayName());
 
-		itemStack = itemBuilder.build();
+		itemStack.setItemMeta(itemBuilder.getItemMeta());
 	}
 
+	public void unbound() {
+		used = false;
+		this.pageLocation = null;
+
+		NBTItem nbtItem = new NBTItem(itemStack, true);
+		nbtItem.removeKey("location");
+		nbtItem.setInteger("CustomModelData", unusedCustomModelData);
+
+		ItemBuilder itemBuilder = new ItemBuilder(nbtItem.getItem());
+		itemBuilder.setLore(getUnboundLore());
+
+		itemStack.setItemMeta(itemBuilder.getItemMeta());
+	}
+
+	@Nonnull
+	@CheckReturnValue
 	private String getLore() {
+
+		if (isUsed()) {
 		return "§5Bound to ("
 				+ pageLocation.getBlockX() + ", " + pageLocation.getBlockY() + ", " + pageLocation.getBlockZ() +
 				") in World " + pageLocation.getWorld().getName();
+		}
+		return getUnboundLore();
+	}
+
+	@Nonnull
+	@CheckReturnValue
+	public static String getUnboundLore() {
+		return "§5Page not bound yet";
 	}
 
 	@CheckReturnValue
