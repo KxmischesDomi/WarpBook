@@ -32,6 +32,9 @@ public class InteractListener implements Listener {
 				} else {
 					Utils.safeGiveItemToPlayer(event.getPlayer(), warpPage.getItemStack());
 				}
+			} else {
+				if (warpPage.getPageLocation() == null) return;
+				WarpBookUtils.teleportPlayer(event.getPlayer(), warpPage.getPageLocation());
 			}
 			return;
 		}
