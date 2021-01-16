@@ -17,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
  */
 public class CraftingListener implements Listener {
 
+	// TODO: Decrease method size
 	@EventHandler
 	public void onCraft(PrepareItemCraftEvent event) {
 		if (event.getRecipe() == null) return;

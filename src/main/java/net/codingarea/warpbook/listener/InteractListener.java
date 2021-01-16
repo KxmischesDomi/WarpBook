@@ -15,6 +15,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
  */
 public class InteractListener implements Listener {
 
+	// TODO: Decrease method size
 	@EventHandler
 	public void onInteract(PlayerInteractEvent event) {
 		if (!event.getAction().toString().contains("RIGHT")) return;
