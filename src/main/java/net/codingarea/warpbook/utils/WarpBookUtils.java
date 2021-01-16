@@ -25,20 +25,27 @@ import static net.codingarea.warpbook.WarpBookPlugin.getInstance;
  */
 public class WarpBookUtils {
 
+	/**
+	 * @param itemStack the item to check
+	 * @return checks if the item is a valid WarpBook
+	 */
 	@CheckReturnValue
 	public static boolean isWarpBook(final @Nonnull ItemStack itemStack) {
 		return false;
 	}
 
+	/**
+	 * @param itemStack the item to check
+	 * @return checks if the item is a valid WarpPage
+	 */
 	@CheckReturnValue
 	public static boolean isWarpPage(final @Nonnull ItemStack itemStack) {
 		return getWarpPage(itemStack) != null;
 	}
 
 	/**
-	 *
-	 * @return null when the item is not a {@link WarpPage}
-	 *
+	 * Will give a {@link WarpPage} instance of the item.
+	 * @return null when the item is not a valid WarpPage
 	 */
 	@Nullable
 	@CheckReturnValue
@@ -58,7 +65,11 @@ public class WarpBookUtils {
 
 		return new WarpPage(itemStack, location);
 	}
-
+	/**
+	 * Will give a {@link WarpBook} instance of the item.
+	 * @return null when the item is not a valid WarpBook
+	 *
+	 */
 	@Nullable
 	@CheckReturnValue
 	public static WarpBook getWarpBook(final @Nonnull ItemStack itemStack) {
@@ -76,11 +87,18 @@ public class WarpBookUtils {
 		return new WarpBook(itemStack);
 	}
 
+	/**
+	 * @param itemStacks array to check
+	 * @return if one of the items is a {@link WarpPage} or a {@link WarpBook}
+	 */
 	@CheckReturnValue
 	public static boolean hasWarpItem(final @Nonnull ItemStack[] itemStacks) {
 		return Arrays.stream(itemStacks).filter(Objects::nonNull).filter(itemStack -> isWarpPage(itemStack) || isWarpBook(itemStack)).count() >= 1;
 	}
 
+	/**
+	 * @return a new WarpPage Item
+	 */
 	@Nonnull
 	@CheckReturnValue
 	public static ItemStack createWarpPage() {
@@ -93,6 +111,9 @@ public class WarpBookUtils {
 		return itemBuilder.build();
 	}
 
+	/**
+	 * @return a new WarpBook item
+	 */
 	@Nonnull
 	@CheckReturnValue
 	public static ItemStack createWarpBook() {
@@ -105,12 +126,18 @@ public class WarpBookUtils {
 		return itemBuilder.build();
 	}
 
+	/**
+	 * Saves the WarpBook inventory in the NBT Tags of the Item
+	 */
 	public static void safeWarpBook(final @Nonnull ItemStack itemStack, final @Nonnull Inventory inventory) {
 		NBTItem nbtItem = new NBTItem(itemStack);
 		nbtItem.setString("inventory", InventoryStringDeSerializer.toBase64(inventory));
 		itemStack.setItemMeta(nbtItem.getItem().getItemMeta());
 	}
 
+	/**
+	 * Teleports a player with the Warp effects
+	 */
 	public static void teleportPlayer(final @Nonnull Player player, final @Nonnull Location location) {
 		player.closeInventory();
 		player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS,  25, 1));
