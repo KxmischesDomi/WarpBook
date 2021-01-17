@@ -30,6 +30,10 @@ public class WarpPage {
 		this.used = location != null;
 	}
 
+	/**
+	 * Bounds the WarpPage to a specific Location
+	 * @param pageLocation the location to bound to page
+	 */
 	public void bound(final @Nonnull Location pageLocation) {
 		used = true;
 		this.pageLocation = pageLocation;
@@ -45,6 +49,9 @@ public class WarpPage {
 		itemStack.setItemMeta(itemBuilder.getItemMeta());
 	}
 
+	/**
+	 * Removes the bounded position from the page and changes the texture
+	 */
 	public void unbound() {
 		used = false;
 		this.pageLocation = null;
@@ -59,10 +66,12 @@ public class WarpPage {
 		itemStack.setItemMeta(itemBuilder.getItemMeta());
 	}
 
+	/**
+	 * @return the lore for the state the page has
+	 */
 	@Nonnull
 	@CheckReturnValue
 	private String getLore() {
-
 		if (isUsed()) {
 		return "§5Bound to ("
 				+ pageLocation.getBlockX() + ", " + pageLocation.getBlockY() + ", " + pageLocation.getBlockZ() +
@@ -71,23 +80,35 @@ public class WarpPage {
 		return getUnboundLore();
 	}
 
+	/**
+	 * @return the lore for the unbound pages
+	 */
 	@Nonnull
 	@CheckReturnValue
 	public static String getUnboundLore() {
 		return "§5Page not bound yet";
 	}
 
+	/**
+	 * @return if the page is bound to a location
+	 */
 	@CheckReturnValue
 	public boolean isUsed() {
 		return used;
 	}
 
+	/**
+	 * @return the location of the WarpPage, null if the page is not bound
+	 */
 	@Nullable
 	@CheckReturnValue
 	public Location getPageLocation() {
 		return pageLocation;
 	}
 
+	/**
+	 * @return the itemstack instance of the WarpPage
+	 */
 	@Nonnull
 	@CheckReturnValue
 	public ItemStack getItemStack() {
