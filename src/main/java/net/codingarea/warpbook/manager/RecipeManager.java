@@ -137,7 +137,6 @@ public class RecipeManager {
 			return null;
 		}
 
-		@Nonnull
 		@CheckReturnValue
 		public static int getDefaultModelData() {
 			return values()[0].customModelData;
