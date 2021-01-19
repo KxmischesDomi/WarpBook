@@ -29,17 +29,16 @@ public class WarpBookPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-
         recipeManager = new RecipeManager();
 
         registerListeners();
     }
 
     public void registerListeners() {
-        registerListener(new RestrictionListener());
-        registerListener(new InteractListener());
-        registerListener(new InventoryListener());
-        registerListener(new CraftingListener());
+        registerListener(new RestrictionListener(),
+                new InteractListener(),
+                new InventoryListener(),
+                new CraftingListener());
     }
 
     public void registerListener(Listener... listeners) {
