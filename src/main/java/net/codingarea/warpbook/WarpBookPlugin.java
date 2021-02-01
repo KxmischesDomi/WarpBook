@@ -30,7 +30,6 @@ public class WarpBookPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         recipeManager = new RecipeManager();
-
         registerListeners();
     }
 
