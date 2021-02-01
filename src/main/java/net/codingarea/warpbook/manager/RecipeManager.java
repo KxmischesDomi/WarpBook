@@ -43,7 +43,7 @@ public class RecipeManager {
 		recipe.shape("   ", " E ", " B ");
 		recipe.setIngredient('E', Material.ENDER_PEARL);
 		recipe.setIngredient('B', Material.BOOK);
-
+		
 		Bukkit.getServer().addRecipe(recipe);
 	}
 
